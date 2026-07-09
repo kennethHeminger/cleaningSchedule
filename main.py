@@ -1,7 +1,44 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
-@app.get("/")
-async def read_root():
-    return {"Cleaning Schedule": "Hello World"}
+templates = Jinja2Templates(directory="templates")
+
+cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
+
+
+
+# Get the list of cleaners and units to display on the schedule page
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    
+    units = ["50 K", "7 Serene Court", "Air on BB 1503", "Air on BB. 1504", "Aria 1903", "Avani 906", "Avani 1204", 
+        "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", 
+        "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
+        "DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", 
+        "DB 24", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69",
+        "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18",
+        "GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
+        "Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", 
+        "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032",
+        "Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233",
+        "TB 250"
+    ]
+
+    return templates.TemplateResponse(
+        "schedule.html", {
+            "request": request,
+            "cleaners": cleaners_data,
+            "units": units
+        },
+    )
+
+# add a new cleaner to the list of cleaners
+@app.post("/cleaners/add")
+async def add_cleaner(name: str = Form(...)):
+    cleaner_name = name.strip()
+    if cleaner_name and cleaner_name not in cleaners_data:
+        cleaners_data.append(cleaner_name)
+    return RedirectResponse(url="/", status_code=303)

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cleaning Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .cleaner-list {
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        select {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cleaning Schedule</h1>
+
+     <form action="/cleaners/add" method="post">
+            <input type="text" name="name" placeholder="Enter cleaner name" required>
+            <button type="submit">Add Cleaner</button>
+    </form>
+    
+    <div class="cleaner-list">
+        <strong>Cleaners:</strong>
+        <ul>
+            {% for cleaner in cleaners %}
+                <li>{{ cleaner }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Apartment</th>
+            <th>Assigned Cleaner</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unit in units %}
+            <tr>
+                <td>{{ unit }}</td>
+                <td>
+                    <select name="cleaner_for_{{ loop.index }}">
+                        <option value="">-- Select cleaner --</option>
+                        {% for cleaner in cleaners %}
+                            <option value="{{ cleaner }}">{{ cleaner }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
