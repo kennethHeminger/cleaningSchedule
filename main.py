@@ -3,15 +3,14 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
-
 templates = Jinja2Templates(directory="templates")
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
 
 
 
-# Get the list of cleaners and units to display on the schedule page
-@app.get("/", response_class=HTMLResponse)
+# Get/Create the list of cleaners and units to display on the schedule page
+@app.get("/schedule", response_class=HTMLResponse)
 async def read_root(request: Request):
     
     units = ["50 K", "7 Serene Court", "Air on BB 1503", "Air on BB. 1504", "Aria 1903", "Avani 906", "Avani 1204", 
@@ -28,14 +27,15 @@ async def read_root(request: Request):
     ]
 
     return templates.TemplateResponse(
-        "schedule.html", {
-            "request": request,
+        request,
+        "schedule.html", 
+        {
             "cleaners": cleaners_data,
             "units": units
         },
     )
 
-# add a new cleaner to the list of cleaners
+# add a new item to the list of cleaners
 @app.post("/cleaners/add")
 async def add_cleaner(name: str = Form(...)):
     cleaner_name = name.strip()
