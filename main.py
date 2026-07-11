@@ -1,8 +1,10 @@
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
@@ -12,8 +14,9 @@ cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
 # Get/Create the list of cleaners and units to display on the schedule page
 @app.get("/schedule", response_class=HTMLResponse)
 async def read_root(request: Request):
+
     
-    units = ["50 K", "7 Serene Court", "Air on BB 1503", "Air on BB. 1504", "Aria 1903", "Avani 906", "Avani 1204", 
+    units = ["50 K", "7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", 
         "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", 
         "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
         "DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", 
@@ -41,4 +44,12 @@ async def add_cleaner(name: str = Form(...)):
     cleaner_name = name.strip()
     if cleaner_name and cleaner_name not in cleaners_data:
         cleaners_data.append(cleaner_name)
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/schedule", status_code=303)
+
+# Delete a cleaner from the list of cleaners
+@app.post("/cleaners/delete")
+async def delete_cleaner(name: str = Form(...)):
+    cleaner_name = name.strip()
+    if cleaner_name in cleaners_data:
+        cleaners_data.remove(cleaner_name)
+    return RedirectResponse(url="/schedule", status_code=303)
