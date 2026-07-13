@@ -8,13 +8,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
-
-
-
 # Get/Create the list of cleaners and units to display on the schedule page
 @app.get("/schedule", response_class=HTMLResponse)
 async def read_root(request: Request):
-
     
     units = ["50 K", "7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", 
         "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", 

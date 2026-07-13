@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Cleaning Schedule</title>
+
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js"></script>
+
 </head>
 <body>
     <h1>Cleaning Schedule</h1>
@@ -17,7 +20,17 @@
         <strong>Cleaners:</strong>
         <ul>
             {% for cleaner in cleaners %}
-                <li>{{ cleaner }}</li>
+                <li class="cleaner-item">
+                    <span class="cleaner-name">{{ cleaner }}</span>
+                    <form action="/cleaners/delete" method="post"
+                    class="delete-cleaner-form" onsubmit="return confirmDelete('{{ cleaner }}');">
+                        <input type="hidden" name="name" value="{{ cleaner }}">
+                        <button type="submit" class="delete-button" 
+                        title="Remove cleaner">
+                        x
+                        </button>
+                    </form>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -26,24 +39,46 @@
         <thead>
         <tr>
             <th>Apartment</th>
-            <th>Assigned Cleaner</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
         </tr>
         </thead>
         <tbody>
         {% for unit in units %}
             <tr>
                 <td>{{ unit }}</td>
-                <td>
-                    <select name="cleaner_for_{{ loop.index }}">
-                        <option value="">-- Select cleaner --</option>
-                        {% for cleaner in cleaners %}
-                            <option value="{{ cleaner }}">{{ cleaner }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
+                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+                <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day }}">
+                </td>                        
+                {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <!-- Pop up for assigning cleans -->
+    <div id="day-action-popup" class = "popup" style ="display: none;">
+        <p id="popup-title"></p>
+
+        <button data-action="needs-cleaning">Checkout Day</button>
+    
+        <div>
+            <label for="popup-cleaner-select">Assign Cleaner:</label>
+            <select id="popup-cleaner-select">
+                <option value="">-- Select Cleaner --</option>
+                {% for cleaner in cleaners %}
+                    <option value="{{ cleaner }}">{{ cleaner }}</option>
+                {% endfor %}
+            </select>
+            <button data-action="assign-cleaner">Confirm</button>
+        </div>
+
+        <button data-action="cancel">Cancel</button>
+    </div>
 </body>
 </html>
