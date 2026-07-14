@@ -3,11 +3,17 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from typing import Dict, Tuple
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+# Dictionary to store assignments
+assignments: Dict[Tuple[str, str], str] = {}
+
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
+
 # Get/Create the list of cleaners and units to display on the schedule page
 @app.get("/schedule", response_class=HTMLResponse)
 async def read_root(request: Request):
@@ -30,8 +36,9 @@ async def read_root(request: Request):
         "schedule.html", 
         {
             "cleaners": cleaners_data,
-            "units": units
-        },
+            "units": units,
+            "asignments": assignments,
+        }
     )
 
 # add a new item to the list of cleaners
@@ -45,7 +52,27 @@ async def add_cleaner(name: str = Form(...)):
 # Delete a cleaner from the list of cleaners
 @app.post("/cleaners/delete")
 async def delete_cleaner(name: str = Form(...)):
-    cleaner_name = name.strip()
-    if cleaner_name in cleaners_data:
-        cleaners_data.remove(cleaner_name)
+    if name in cleaners_data:
+        cleaners_data.remove(name)
+
+        # Find all keys where cleaner name is assigned and delete them from assignments
+        to_delete = [
+            key for key, value in assignments.items() 
+            if value == name
+        ]
+        for key in to_delete:
+            del assignments[key]
+
     return RedirectResponse(url="/schedule", status_code=303)
+
+# Assign a cleaner to a specific unit and day
+@app.post("/assign")
+async def assign_cleaner(
+    unit: str = Form(...), 
+    day: str = Form(...), 
+    cleaner: str = Form(...)
+):
+    assignments[(unit, day)] = cleaner
+    print({"New assignment", unit, day, "->", cleaner})
+    print("Assignments dict:", assignments)
+    return {"okay": True, "message": f"Assigned {cleaner} to {unit} on {day}"}

@@ -29,14 +29,36 @@ document.addEventListener('DOMContentLoaded', function() {
             activeCell.textContent = "Needs Cleaning";
         } 
     
-        else if (action === 'assign-cleaner') {
+        else if (action === 'assign') {
             const cleanerName = cleanerSelect.value;
             if (!cleanerName) {
                 alert("Please select a cleaner.");
                 return;
             }
+            // Update UI
             activeCell.textContent = cleanerName;
             activeCell.classList.add('assigned');
+
+            // Get unit and day from the active cell
+            const unit = activeCell.getAttribute('data-unit');
+            const day = activeCell.getAttribute('data-day');
+
+            // Send assignment to the server
+            fetch('/assign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    unit: unit,
+                    day: day,
+                    cleaner: cleanerName
+                })
+            }).then(response => {
+                if (!response.ok) {
+                    alert("Failed to assign cleaner.");
+                }
+            });
         }
         if (action === 'needs-cleaning' ||
             action === 'assign-cleaner' || 
