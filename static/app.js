@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             activeCell.textContent = "Needs Cleaning";
         } 
     
-        else if (action === 'assign') {
+        else if (action === 'assign-cleaner') {
             const cleanerName = cleanerSelect.value;
             if (!cleanerName) {
                 alert("Please select a cleaner.");

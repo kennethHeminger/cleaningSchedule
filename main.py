@@ -2,7 +2,6 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
 from typing import Dict, Tuple
 
 app = FastAPI()
@@ -31,13 +30,15 @@ async def read_root(request: Request):
         "TB 250"
     ]
 
+    print("Assignments at render: ", assignments)
+
     return templates.TemplateResponse(
         request,
         "schedule.html", 
         {
             "cleaners": cleaners_data,
             "units": units,
-            "asignments": assignments,
+            "assignments": assignments,
         }
     )
 

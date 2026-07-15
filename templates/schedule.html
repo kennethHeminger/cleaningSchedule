@@ -52,8 +52,15 @@
         {% for unit in units %}
             <tr>
                 <td>{{ unit }}</td>
-                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", 
+                "Friday", "Saturday", "Sunday"] %}
+                {% set assigned_cleaner = assignments.get((unit, day)) %}
                 <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day }}">
+                    {% if assigned_cleaner %}
+                        {{ assigned_cleaner }}
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>                        
                 {% endfor %}
             </tr>
@@ -75,7 +82,7 @@
                     <option value="{{ cleaner }}">{{ cleaner }}</option>
                 {% endfor %}
             </select>
-            <button data-action="assign-cleaner">Confirm</button>
+            <button data-action="assign">Confirm</button>
         </div>
 
         <button data-action="cancel">Cancel</button>
