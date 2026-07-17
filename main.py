@@ -77,3 +77,13 @@ async def assign_cleaner(
     print({"New assignment", unit, day, "->", cleaner})
     print("Assignments dict:", assignments)
     return {"okay": True, "message": f"Assigned {cleaner} to {unit} on {day}"}
+
+@app.post("/clear")
+async def clear_assignments(
+    unit: str = Form(...),
+    day: str = Form(...),
+):
+    # Remove the assignment for the specified unit and day
+    assignments.pop((unit, day), None)
+    print({"Cleared assignment for", unit, day})
+    return {"okay": True,}

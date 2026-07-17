@@ -72,7 +72,7 @@
     <div id="day-action-popup" class = "popup" style ="display: none;">
         <p id="popup-title"></p>
 
-        <button data-action="needs-cleaning">Mark as Needs Cleaning</button>
+        <button data-action="needs-cleaning">Needs Cleaning</button>
     
         <div>
             <label for="popup-cleaner-select">Assign Cleaner:</label>
@@ -82,10 +82,12 @@
                     <option value="{{ cleaner }}">{{ cleaner }}</option>
                 {% endfor %}
             </select>
-            <button data-action="assign">Confirm</button>
+            <button data-action="assign-cleaner">Confirm</button>
+            <button data-action="clear">Clear</button>
         </div>
 
-        <button data-action="cancel">Cancel</button>
+
+        <button data-action="cancel">Back</button>
     </div>
 </body>
 </html>

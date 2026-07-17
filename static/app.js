@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!action || !activeCell) return;
 
         if (action === 'needs-cleaning') {
+            // Debug log
+            console.log("needs-cleaning clicked")
             activeCell.classList.add('needs-cleaning');
             activeCell.textContent = "Needs Cleaning";
         } 
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("Please select a cleaner.");
                 return;
             }
+
             // Update UI
             activeCell.textContent = cleanerName;
             activeCell.classList.add('assigned');
@@ -60,12 +63,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+
+        else if (action === "clear"){
+            //Clear UI
+            console.log("Clear button Clicked!")
+            activeCell.textContent = "-";
+            activeCell.classList.remove('assigned', 'needs-cleaning');
+
+            const unit = activeCell.getAttribute('data-unit');
+            const day = activeCell.getAttribute('data-day');
+
+            fetch('/clear', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    unit: unit,
+                    day: day,
+                }),
+            }).then(response => {
+                if (!response.ok) {
+                    alert("Failed to clear assignment")
+                }
+            })
+        }
+
         if (action === 'needs-cleaning' ||
             action === 'assign-cleaner' || 
+            action === 'clear' ||
             action === 'cancel') {
                 popup.style.display = 'none';
                 activeCell = null;
             }
-        });
     });
+});
     
