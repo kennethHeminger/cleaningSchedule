@@ -1,11 +1,3 @@
-.delete-button {   
-       background-color: #ff4d4d;
-        color: white;
-        border: none;
-       padding: 1px 2px;
-        cursor: pointer;
-    }
-
 .cleaner-item {
     margin-bottom: 4px;
     }
@@ -13,6 +5,14 @@
 .cleaner-name {
     display: inline-block;
             margin-right: 10px;
+    }
+
+.delete-button {   
+       background-color: #e34d4d;
+        color: white;
+        border: none;
+       padding: 1px 2px;
+        cursor: pointer;
     }
 
 .delete-cleaner-form {
@@ -78,7 +78,7 @@ body {
         }
 
     th {
-            background-color: #f5f5f5;
+            background-color: #ffffff;
         }
 
     select {

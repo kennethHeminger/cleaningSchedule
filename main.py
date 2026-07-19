@@ -9,7 +9,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # Dictionary to store assignments
-assignments: Dict[Tuple[str, str], str] = {}
+assignments: Dict[Tuple[str, str], Dict[str, bool | str]] = {}
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
 
@@ -73,7 +73,13 @@ async def assign_cleaner(
     day: str = Form(...), 
     cleaner: str = Form(...)
 ):
-    assignments[(unit, day)] = cleaner
+    
+    is_b2b = False
+
+    assignments[(unit, day)] = {
+        "cleaner": cleaner,
+        "b2b": is_b2b,
+    }
     print({"New assignment", unit, day, "->", cleaner})
     print("Assignments dict:", assignments)
     return {"okay": True, "message": f"Assigned {cleaner} to {unit} on {day}"}
@@ -87,3 +93,25 @@ async def clear_assignments(
     assignments.pop((unit, day), None)
     print({"Cleared assignment for", unit, day})
     return {"okay": True,}
+
+@app.post("/mark-b2b")
+async def mark_b2b(
+    unit: str = Form(...),
+    day: str = Form(...),
+    auto_needs_cleaning: str = Form("false"),
+):
+    key = (unit, day)
+    is_auto_needs_cleaning = auto_needs_cleaning.lower() == "true"
+
+    if key in assignments:
+        assignments[key]["b2b"] = True
+        print("Marked B2B:", unit, day, "->", assignments[key])
+
+    else:
+        assignments[key] = {
+            "cleaner": "Needs Cleaning",
+            "b2b": True,
+            }
+        print("Created Needs Cleaning B2B assignment:", unit, day, "->", assignments[key])
+
+        return {"ok": True}

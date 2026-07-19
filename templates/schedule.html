@@ -25,6 +25,8 @@
                     <form action="/cleaners/delete" method="post"
                     class="delete-cleaner-form" onsubmit="return confirmDelete('{{ cleaner }}');">
                         <input type="hidden" name="name" value="{{ cleaner }}">
+                        
+                        
                         <button type="submit" class="delete-button" 
                         title="Remove cleaner">
                         x
@@ -38,7 +40,7 @@
     <table>
         <thead>
         <tr>
-            <th>Apartment</th>
+            <th>Property</th>
             <th>Monday</th>
             <th>Tuesday</th>
             <th>Wednesday</th>
@@ -56,8 +58,9 @@
                 "Friday", "Saturday", "Sunday"] %}
                 {% set assigned_cleaner = assignments.get((unit, day)) %}
                 <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day }}">
-                    {% if assigned_cleaner %}
-                        {{ assigned_cleaner }}
+                    {% if assignment %}
+                        {{ assignment.cleaner }}{% if assignment.b2b %}
+                        **B2B{% endif %}
                     {% else %}
                         -
                     {% endif %}
@@ -73,6 +76,7 @@
         <p id="popup-title"></p>
 
         <button data-action="needs-cleaning">Needs Cleaning</button>
+        <button data-action="b2b">Mark B2B</button>
     
         <div>
             <label for="popup-cleaner-select">Assign Cleaner:</label>
@@ -85,8 +89,7 @@
             <button data-action="assign-cleaner">Confirm</button>
             <button data-action="clear">Clear</button>
         </div>
-
-
+        
         <button data-action="cancel">Back</button>
     </div>
 </body>
