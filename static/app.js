@@ -53,8 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Update UI
-            activeCell.textContent = cleanerName;
-            activeCell.classList.add('assigned');
+            const wasB2B = activeCell.textContent.includes("**B2B") ||
+            activeCell.classList.contains('b2b');
+
+            if (wasB2B) {
+            activeCell.textContent = cleanerName + " **B2B";
+            activeCell.classList.add('assigned', 'b2b');
+            activeCell.classList.remove('needs-cleaning');
+            } else {
+                activeCell.textContent = cleanerName;
+                activeCell.classList.add('assigned');
+                activeCell.classList.remove('needs-cleaning');
+            }
 
             // Get unit and day from the active cell
             const unit = activeCell.getAttribute('data-unit');

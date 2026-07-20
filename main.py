@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Dict, Tuple
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -74,11 +75,14 @@ async def assign_cleaner(
     cleaner: str = Form(...)
 ):
     
-    is_b2b = False
+    key = (unit, day)
+
+    existing = assignments.get(key)
+    existing_b2b = existing["b2b"] if existing and "b2b" in existing else False
 
     assignments[(unit, day)] = {
         "cleaner": cleaner,
-        "b2b": is_b2b,
+        "b2b": existing_b2b,
     }
     print({"New assignment", unit, day, "->", cleaner})
     print("Assignments dict:", assignments)
@@ -115,3 +119,39 @@ async def mark_b2b(
         print("Created Needs Cleaning B2B assignment:", unit, day, "->", assignments[key])
 
         return {"ok": True}
+    
+@app.get("/export")
+async def export_schedule():
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+    export_lines = []
+
+    for cleaner in cleaners:
+        export_lines.append(f"{cleaner}:")
+        export_lines.append("")
+
+        for day in days:
+            day_units = []
+
+            for (unit, assigned_day), assignment in assignments.items():
+                if assigned_day == day and assignment["cleaner"] == cleaner:
+                    line = unit
+                    if assignment.get("b2b"):
+                        line += " **B2B"
+                        day_units.append(line)
+
+            if day_units:
+                export_lines.append(day)
+                export_lines.extend(day_units)
+                export_lines("")
+            else:
+                export_lines.append(day)
+                export_lines.append("/")
+                export_lines.append("")
+        
+        export_lines.append("")
+        export_lines.append("-----")
+        export_lines.append("")
+
+    return PlainTextResponse("\n".join(export_lines))
+                            
