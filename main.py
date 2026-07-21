@@ -118,7 +118,7 @@ async def mark_b2b(
             }
         print("Created Needs Cleaning B2B assignment:", unit, day, "->", assignments[key])
 
-        return {"ok": True}
+    return {"ok": True}
     
 @app.get("/export")
 async def export_schedule():
@@ -126,7 +126,7 @@ async def export_schedule():
 
     export_lines = []
 
-    for cleaner in cleaners:
+    for cleaner in cleaners_data:
         export_lines.append(f"{cleaner}:")
         export_lines.append("")
 
@@ -138,12 +138,12 @@ async def export_schedule():
                     line = unit
                     if assignment.get("b2b"):
                         line += " **B2B"
-                        day_units.append(line)
+                    day_units.append(line)
 
             if day_units:
                 export_lines.append(day)
                 export_lines.extend(day_units)
-                export_lines("")
+                export_lines.append("")
             else:
                 export_lines.append(day)
                 export_lines.append("/")

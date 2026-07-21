@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const popupTitle = document.getElementById('popup-title');
     const cleanerSelect = document.getElementById('popup-cleaner-select');
 
+    const exportButton = document.getElementById('export-button');
+    const exportOutput = document.getElementById('export-output');
+
     let activeCell = null;
 
     dayCells.forEach(cell => {
@@ -19,6 +22,21 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.style.display = 'block';
         });
     });
+
+    if (exportButton) {
+        exportButton.addEventListener('click', function() {
+        fetch('/export')
+        .then(response => response.text())
+        .then(text => {
+            exportOutput.textContent = text;
+            exportOutput.style.display = 'block';
+        })
+        .catch(() => {
+            alert("Failed to load export.");
+        });
+        })
+        
+    }
 
     popup.addEventListener('click', function(event) {
         const action = event.target.dataset.action;
@@ -160,5 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 activeCell = null;
             }
     });
+    
 });
     
