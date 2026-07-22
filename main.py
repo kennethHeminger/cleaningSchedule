@@ -15,7 +15,7 @@ assignments: Dict[Tuple[str, str], Dict[str, bool | str]] = {}
 cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
 
 # Get/Create the list of cleaners and units to display on the schedule page
-@app.get("/schedule", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     
     units = ["50 K", "7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", 
@@ -49,7 +49,7 @@ async def add_cleaner(name: str = Form(...)):
     cleaner_name = name.strip()
     if cleaner_name and cleaner_name not in cleaners_data:
         cleaners_data.append(cleaner_name)
-    return RedirectResponse(url="/schedule", status_code=303)
+    return RedirectResponse(url="/", status_code=303)
 
 # Delete a cleaner from the list of cleaners
 @app.post("/cleaners/delete")
@@ -65,7 +65,7 @@ async def delete_cleaner(name: str = Form(...)):
         for key in to_delete:
             del assignments[key]
 
-    return RedirectResponse(url="/schedule", status_code=303)
+    return RedirectResponse(url="/", status_code=303)
 
 # Assign a cleaner to a specific unit and day
 @app.post("/assign")
@@ -119,6 +119,29 @@ async def mark_b2b(
         print("Created Needs Cleaning B2B assignment:", unit, day, "->", assignments[key])
 
     return {"ok": True}
+
+@app.post("/mark-vacant")
+async def mark_vacant(
+    unit: str = Form(...),
+    day: str = Form(...),
+    auto_needs_cleaning: str = Form("false"),
+):
+    key = (unit, day)
+    is_auto_needs_cleaning = auto_needs_cleaning.lower() == "true"
+
+    if key in assignments:
+        assignments[key]["vacant"] = True
+        print("Marked Vacant:", unit, day, "->", assignments[key])
+
+    else:
+        assignments[key] = {
+            "cleaner": "Needs Cleaning",
+            "vacant": True,
+            "b2b": False,
+            }
+        print("Created Needs Cleaning Vacant assignment:", unit, day, "->", assignments[key])
+
+    return {"ok": True}
     
 @app.get("/export")
 async def export_schedule():
@@ -138,6 +161,8 @@ async def export_schedule():
                     line = unit
                     if assignment.get("b2b"):
                         line += " **B2B"
+                    if assignment.get("vacant"):
+                        line += " (Vacant)"
                     day_units.append(line)
 
             if day_units:

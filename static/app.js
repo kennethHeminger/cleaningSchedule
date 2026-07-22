@@ -169,8 +169,47 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }
 
+        else if (action === 'vacant') {
+            const currentText = activeCell.textContent.trim();
+
+            if (!currentText || currentText === "-" || currentText === ""){
+
+                // No assignment yet
+                activeCell.textContent =" Needs Cleaning (Vacant)";
+                activeCell.classList.add('needs-cleaning', 'vacant');
+            } else {
+
+                // Cleaner already assigned
+                if (!currentText.includes("(Vacant)")){
+                    activeCell.textContent = currentText + " (Vacant)";
+                }
+                activeCell.classList.add('vacant');
+            }
+
+            const unit = activeCell.getAttribute('data-unit');
+            const day = activeCell.getAttribute('data-day');
+
+            fetch('/mark-vacant', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    unit: unit,
+                    day: day,
+                    auto_needs_cleaning: (!currentText || currentText === "-"
+                        || currentText === "").toString(),
+                }),
+            }).then(response => {
+                if (!response.ok) {
+                    alert("Failed to mark vacant");
+                }
+            })
+        }
+
         if (action === 'needs-cleaning' ||
             action === 'b2b' ||
+            action === 'vacant' ||
             action === 'assign-cleaner' || 
             action === 'clear' ||
             action === 'cancel') {
