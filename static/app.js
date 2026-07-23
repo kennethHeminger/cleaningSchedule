@@ -73,16 +73,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update UI
             const wasB2B = activeCell.textContent.includes("**B2B") ||
             activeCell.classList.contains('b2b');
+            const wasVacant = activeCell.textContent.includes("(Vacant)") ||
+            activeCell.classList.contains('vacant');
+    
+            let newText = cleanerName;
+            if (wasB2B) newText += " **B2B";
+            if (wasVacant) newText=+ "(Vacant)";
 
-            if (wasB2B) {
-            activeCell.textContent = cleanerName + " **B2B";
-            activeCell.classList.add('assigned', 'b2b');
+    
+            activeCell.textContent = newText
+            activeCell.classList.add('assigned');
             activeCell.classList.remove('needs-cleaning');
-            } else {
-                activeCell.textContent = cleanerName;
-                activeCell.classList.add('assigned');
-                activeCell.classList.remove('needs-cleaning');
-            }
+            if (wasB2B) activeCell.classList.add('b2b');
+            if (wasVacant) activeCell.classList.add('vacant');
 
             // Get unit and day from the active cell
             const unit = activeCell.getAttribute('data-unit');

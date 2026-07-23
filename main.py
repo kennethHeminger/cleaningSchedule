@@ -79,10 +79,12 @@ async def assign_cleaner(
 
     existing = assignments.get(key)
     existing_b2b = existing["b2b"] if existing and "b2b" in existing else False
+    existing_vacant = existing.get("vacant", False) if existing else False
 
     assignments[(unit, day)] = {
         "cleaner": cleaner,
         "b2b": existing_b2b,
+        "vacant": existing_vacant
     }
     print({"New assignment", unit, day, "->", cleaner})
     print("Assignments dict:", assignments)
