@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory="templates")
 # Dictionary to store assignments
 assignments: Dict[Tuple[str, str], Dict[str, bool | str]] = {}
 
-cleaners_data = ["PM", "Paula", "Jorge", "Mel", "Bobo"]
+cleaners_data = ["PM", "Paula", "Jorge", "Mel"]
 
 # Get/Create the list of cleaners and units to display on the schedule page
 @app.get("/", response_class=HTMLResponse)
@@ -151,7 +151,9 @@ async def export_schedule():
 
     export_lines = []
 
-    for cleaner in cleaners_data:
+    all_cleaners = cleaners_data + ["To Assign"]
+
+    for cleaner in all_cleaners:
         export_lines.append(f"{cleaner}:")
         export_lines.append("")
 
@@ -159,12 +161,21 @@ async def export_schedule():
             day_units = []
 
             for (unit, assigned_day), assignment in assignments.items():
-                if assigned_day == day and assignment["cleaner"] == cleaner:
+                if assigned_day != day:
+                    continue
+
+                is_match = (
+                    assignment ["cleaner"] == cleaner
+                    if cleaner != "To Assign"
+                    else assignment ["cleaner"] == "Needs Cleaning"
+                )
+
+                if is_match:
                     line = unit
                     if assignment.get("b2b"):
                         line += " **B2B"
                     if assignment.get("vacant"):
-                        line += " (Vacant)"
+                        line += " (vacant)"
                     day_units.append(line)
 
             if day_units:
@@ -177,7 +188,7 @@ async def export_schedule():
                 export_lines.append("")
         
         export_lines.append("")
-        export_lines.append("-----")
+        export_lines.append("----------------------------------")
         export_lines.append("")
 
     return PlainTextResponse("\n".join(export_lines))
