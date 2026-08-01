@@ -76,4 +76,4 @@ The app will be available at http://127.0.0.1:8000/
 
 - Persist assignments to a database (e.g. SQLite) instead of in-memory storage.
 - Add authentication for multi-user access.
-- Add a calendar view spanning multiple weeks.
+- Add cleaner information i.e. availability, max cleans per day

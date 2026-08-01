@@ -4,6 +4,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Dict, Tuple
 from fastapi.responses import PlainTextResponse
+from datetime import date, timedelta
+
+def get_week_dates(reference_date: date) -> list[date]:
+    monday = reference_date - timedelta(days=reference_date.weekday())
+    return[monday + timedelta(days=i) for i in range (7)]
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -14,22 +19,36 @@ assignments: Dict[Tuple[str, str], Dict[str, bool | str]] = {}
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel"]
 
+units = ["50 K", "7 Serene Court", "Air 1503", "Air 1504", "Aria 1903",     "Avani 906", "Avani 1204", "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", 
+"Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
+"DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19",     "DB 24", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18",
+"GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
+"Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", 
+"SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032",
+"Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233",
+"TB 250"]
+
+
 # Get/Create the list of cleaners and units to display on the schedule page
 @app.get("/", response_class=HTMLResponse)
-async def read_root(request: Request):
+async def read_root(request: Request, week_start: str | None = None):
     
-    units = ["50 K", "7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", 
-        "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", 
-        "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
-        "DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", 
-        "DB 24", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69",
-        "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18",
-        "GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
-        "Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", 
-        "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032",
-        "Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233",
-        "TB 250"
+    if week_start:
+        ref_date = date.fromisoformat(week_start)
+    else:
+        ref_date = date.today()
+
+    week_dates = get_week_dates(ref_date)
+    day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+    days = [
+        {"name": name, "date": d.isoformat(), "display":
+         d.strftime("%b %d")}
+         for name, d in zip(day_names, week_dates)
     ]
+
+    prev_week = (week_dates[0] - timedelta (days=7)).isoformat()
+    next_week = (week_dates[0] + timedelta (days=7)).isoformat()
 
     print("Assignments at render: ", assignments)
 
@@ -40,6 +59,10 @@ async def read_root(request: Request):
             "cleaners": cleaners_data,
             "units": units,
             "assignments": assignments,
+            "days": days,
+            "prev_week": prev_week,
+            "next_week":  next_week,
+            "week_start": week_dates[0].isoformat(),
         }
     )
 
@@ -145,23 +168,34 @@ async def mark_vacant(
 
     return {"ok": True}
     
+# Print text of schedule    
 @app.get("/export")
-async def export_schedule():
-    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+async def export_schedule(week_start: str | None = None):
+    ref_date = date.fromisoformat(week_start) if week_start else date.today()
+    week_dates = get_week_dates(ref_date)
+    day_abbrs = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+    def ordinal(n: int) -> str:
+        if 11 <= n % 100 <= 13:
+            suffix = "th"
+        else:
+            suffix = {1: "st", 2: "nd"}.get(n % 10, "th")
+        return f"{n}{suffix}"
 
     export_lines = []
-
     all_cleaners = cleaners_data + ["To Assign"]
 
     for cleaner in all_cleaners:
         export_lines.append(f"{cleaner}:")
         export_lines.append("")
 
-        for day in days:
+        for day_abbr, day_date in zip(day_abbrs, week_dates):
+            day_key = day_date.isoformat()
+            day_label = f"{day_abbr} {ordinal(day_date.day)}"
             day_units = []
 
             for (unit, assigned_day), assignment in assignments.items():
-                if assigned_day != day:
+                if assigned_day != day_key:
                     continue
 
                 is_match = (
@@ -179,11 +213,11 @@ async def export_schedule():
                     day_units.append(line)
 
             if day_units:
-                export_lines.append(day)
+                export_lines.append(day_label)
                 export_lines.extend(day_units)
                 export_lines.append("")
             else:
-                export_lines.append(day)
+                export_lines.append(day_label)
                 export_lines.append("/")
                 export_lines.append("")
         

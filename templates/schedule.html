@@ -39,27 +39,30 @@
 
     <button id="export-button">Export Schedule</button>
     <pre id="export-output" style="white-space: pre-wrap; display: none;"></pre>
+   
+    <div class ="week-nav">
+        <a href="/?week_start={{ prev_week }}">&laquo; Previous Week</a>
+
+        <input type="date" id="jump-to-date" value="{{ week_start }}">
+        
+        <a href="/?week_start={{ next_week }}"> Next Week &raquo;</a>
+    </div>
+
     <table>
         <thead>
         <tr>
-            <th>Property</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Sunday</th>
+            <th>Unit</th>
+            {% for day in days %}
+            <th>{{ day.name }}<br><small>{{ day.display}}</small></th>
+            {% endfor %}
         </tr>
         </thead>
         <tbody>
         {% for unit in units %}
             <tr>
                 <td>{{ unit }}</td>
-                {% for day in ["Monday", "Tuesday", "Wednesday", "Thursday", 
-                "Friday", "Saturday", "Sunday"] %}
-                {% set assigned_cleaner = assignments.get((unit, day)) %}
-                <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day }}">
+                {% for day in days %}
+                <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day.date }}">
                     {% if assignment %}
                         {{ assignment.cleaner }}{% if assignment.b2b %}
                         **B2B{% endif %}

@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const exportButton = document.getElementById('export-button');
     const exportOutput = document.getElementById('export-output');
 
+    const jumpInput = document.getElementById('jump-to-date');
+    if (jumpInput) {
+        jumpInput.addEventListener('change', function() {
+            window.location.href = `/?week_start=${jumpInput.value}`;
+        });
+    }
     let activeCell = null;
 
     dayCells.forEach(cell => {
@@ -25,7 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (exportButton) {
         exportButton.addEventListener('click', function() {
-        fetch('/export')
+            const currentWeekStart = jumpInput.value;
+
+        fetch(`/export?week_start=${currentWeekStart}`)
         .then(response => response.text())
         .then(text => {
             exportOutput.textContent = text;
