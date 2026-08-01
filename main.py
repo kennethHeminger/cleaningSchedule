@@ -5,7 +5,28 @@ from fastapi.templating import Jinja2Templates
 from typing import Dict, Tuple
 from fastapi.responses import PlainTextResponse
 from datetime import date, timedelta
+from pathlib import Path
 
+import json
+
+DATA_FILE = Path("assignments.json")
+
+# Load assignments from the JSON file if it exists
+def save_assignments():
+    serializable = {
+        f"{unit}|{day}": value for (unit, day), value in assignments.items()
+    }
+    DATA_FILE.write_text(json.dumps(serializable, indent=2))
+
+# Load assignments from the JSON file if it exists
+def load_assignments():
+    if DATA_FILE.exists():
+        raw = json.loads(DATA_FILE.read_text())
+        for key, value in raw.items():
+            unit, day = key.split("|", 1)
+            assignments[(unit, day)] = value    
+
+# Get the dates for the week starting from the reference date
 def get_week_dates(reference_date: date) -> list[date]:
     monday = reference_date - timedelta(days=reference_date.weekday())
     return[monday + timedelta(days=i) for i in range (7)]
@@ -16,6 +37,7 @@ templates = Jinja2Templates(directory="templates")
 
 # Dictionary to store assignments
 assignments: Dict[Tuple[str, str], Dict[str, bool | str]] = {}
+load_assignments()
 
 cleaners_data = ["PM", "Paula", "Jorge", "Mel"]
 
@@ -109,10 +131,13 @@ async def assign_cleaner(
         "b2b": existing_b2b,
         "vacant": existing_vacant
     }
+    save_assignments()
+
     print({"New assignment", unit, day, "->", cleaner})
     print("Assignments dict:", assignments)
     return {"okay": True, "message": f"Assigned {cleaner} to {unit} on {day}"}
 
+# Clear the assignment for a specific unit and day
 @app.post("/clear")
 async def clear_assignments(
     unit: str = Form(...),
@@ -120,9 +145,12 @@ async def clear_assignments(
 ):
     # Remove the assignment for the specified unit and day
     assignments.pop((unit, day), None)
+    save_assignments()
+
     print({"Cleared assignment for", unit, day})
     return {"okay": True,}
 
+# Mark a unit and day as B2B (Back-to-Back)
 @app.post("/mark-b2b")
 async def mark_b2b(
     unit: str = Form(...),
@@ -143,8 +171,10 @@ async def mark_b2b(
             }
         print("Created Needs Cleaning B2B assignment:", unit, day, "->", assignments[key])
 
+    save_assignments()
     return {"ok": True}
 
+# Mark a unit and day as Vacant
 @app.post("/mark-vacant")
 async def mark_vacant(
     unit: str = Form(...),
@@ -166,6 +196,7 @@ async def mark_vacant(
             }
         print("Created Needs Cleaning Vacant assignment:", unit, day, "->", assignments[key])
 
+    save_assignments()
     return {"ok": True}
     
 # Print text of schedule    
