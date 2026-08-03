@@ -18,15 +18,16 @@
 
     <div class="cleaner-list">
         <strong>Cleaners:</strong>
-        <ul>
-            {% for cleaner in cleaners %}
-                <li class="cleaner-item">
-                    <span class="cleaner-name">{{ cleaner }}</span>
+        <ul id = "cleaner-list">
+            {% for name, data in cleaners.items() %}
+                <li class="cleaner-item" data-name="{{ name }}"
+                    data-availability="{{ data.availability | join (',') }}">
+                
+                    {{ name }}
                     <form action="/cleaners/delete" method="post"
-                    class="delete-cleaner-form" onsubmit="return confirmDelete('{{ cleaner }}');">
-                        <input type="hidden" name="name" value="{{ cleaner }}">
-                        
-                        
+                    class="delete-cleaner-form" 
+                    onsubmit="return confirmDelete('{{ name }}');">
+                        <input type="hidden" name="name" value="{{ name }}">    
                         <button type="submit" class="delete-button" 
                         title="Remove cleaner">
                         x
@@ -35,6 +36,26 @@
                 </li>
             {% endfor %}
         </ul>
+    </div>
+
+    <div id="cleaner-setting-modal" style="display: none;">
+        <h3 id="cleaner-settings-title">Edit Cleaner Settings</h3>
+        <form id="cleaner-settings-form" method="post">
+            <input type="hidden" name="name" id="cleaner-name">
+
+            <p>Availability:</p>
+                <label><input type="checkbox" name="availability" value="Mon"> Mon</label>
+                <label><input type="checkbox" name="availability" value="Tue"> Tue</label>
+                <label><input type="checkbox" name="availability" value="Wed"> Wed</label>
+                <label><input type="checkbox" name="availability" value="Thu"> Thu</label>
+                <label><input type="checkbox" name="availability" value="Fri"> Fri</label>
+                <label><input type="checkbox" name="availability" value="Sat"> Sat</label>
+                <label><input type="checkbox" name="availability" value="Sun"> Sun</label>
+
+                <button type="button" id="save-cleaner-settings">Save</button>
+                <button type="button" id="delete-cleaner-settings">Delete</button>
+                <button type="button" id="cancel-cleaner-settings">Cancel</button>
+        </form>
     </div>
 
     <button id="export-button">Export Schedule</button>
@@ -62,6 +83,7 @@
             <tr>
                 <td>{{ unit }}</td>
                 {% for day in days %}
+                {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
                 <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day.date }}">
                     {% if assignment %}
                         {{ assignment.cleaner }}{% if assignment.b2b %}

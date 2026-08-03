@@ -25,6 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const unit = cell.getAttribute('data-unit');
             const day = cell.getAttribute('data-day');
             popupTitle.textContent = `Assign Cleaner for ${unit} on ${day}`;
+
+            fetch(`/cleaners/available?day=${day}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the available cleaners data
+                    cleanerSelect.innerHTML = ''; 
+                    // Clear existing options
+                    data.cleaners.forEach(name => {
+                        const option = document.createElement('option');
+                        option.value = name;
+                        option.textContent = name;
+                        cleanerSelect.appendChild(option);
+                    })
+                });
+
             popup.style.display = 'block';
         });
     });
@@ -86,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
             let newText = cleanerName;
             if (wasB2B) newText += " **B2B";
-            if (wasVacant) newText=+ "(Vacant)";
+            if (wasVacant) newText += " (Vacant)";
 
     
             activeCell.textContent = newText
@@ -121,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             //Clear UI
             console.log("Clear button Clicked!")
             activeCell.textContent = "-";
-            activeCell.classList.remove('assigned', 'needs-cleaning');
+            activeCell.classList.remove('assigned', 'needs-cleaning', 'b2b', 'vacant');
 
             const unit = activeCell.getAttribute('data-unit');
             const day = activeCell.getAttribute('data-day');
