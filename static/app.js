@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const exportButton = document.getElementById('export-button');
     const exportOutput = document.getElementById('export-output');
-
+    const settingsModal = document.getElementById('cleaner-settings-modal');
+    const settingsNameInput = document.getElementById('cleaner-settings-name');
+    const settingsTitle = document.getElementById('cleaner-settings-title');
     const jumpInput = document.getElementById('jump-to-date');
+    
     if (jumpInput) {
         jumpInput.addEventListener('change', function() {
             window.location.href = `/?week_start=${jumpInput.value}`;

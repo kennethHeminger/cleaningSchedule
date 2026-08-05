@@ -46,7 +46,7 @@ cleaners_data: Dict[str, Dict] ={
 }
 
 units = ["7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
-"DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19",     "DB 24", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18","GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
+"DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", "DB 24", "DB 25", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18","GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
 "Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032","Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233",
 "TB 250"]
 
@@ -108,7 +108,6 @@ async def delete_cleaner(name: str = Form(...)):
     if name in cleaners_data:
         del cleaners_data[name]
     
-
         # Find all keys where cleaner name is assigned and delete them from assignments
         to_delete = [
             key for key, value in assignments.items() 
@@ -120,7 +119,7 @@ async def delete_cleaner(name: str = Form(...)):
     return RedirectResponse(url="/", status_code=303)
 
 # Update the availability of a cleaner
-app.post("/cleaners/update")
+@app.post("/cleaners/update")
 async def update_cleaner(
         name: str = Form(...),
         availability: list[str] = Form(...)):
@@ -129,7 +128,7 @@ async def update_cleaner(
     return RedirectResponse(url="/", status_code=303)
 
 # Get the list of available cleaners for a specific unit and day
-app.post("/cleaners/availabile")
+@app.get("/cleaners/available")
 async def available_cleaners(day: str):
     day_obj = date.fromisoformat(day)
     day_abbr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][day_obj.weekday()]
@@ -137,7 +136,7 @@ async def available_cleaners(day: str):
         name for name, data in cleaners_data.items()
         if day_abbr in data.get("availability", [])
     ]
-    return {"available_cleaners": available}
+    return {"cleaners": available}
 
 # Assign a cleaner to a specific unit and day
 @app.post("/assign")
@@ -159,10 +158,15 @@ async def assign_cleaner(
         "vacant": existing_vacant
     }
     save_assignments()
-
-    print({"New assignment", unit, day, "->", cleaner})
-    print("Assignments dict:", assignments)
     return {"okay": True, "message": f"Assigned {cleaner} to {unit} on {day}"}
+
+# Mark a unit and day as "Needs Cleaning"
+@app.post("/assign-needs-cleaning")
+async def assign_needs_cleaning(unit: str = Form(...), day: str = Form(...)):
+    assignments[(unit, day)] = {"cleaner": "Needs Cleaning", "b2b": False, "vacant": False}
+    save_assignments()
+    print(f"Marked Needs Cleaning: {unit} {day}")
+    return {"ok": True}
 
 # Clear the assignment for a specific unit and day
 @app.post("/clear")
@@ -241,7 +245,7 @@ async def export_schedule(week_start: str | None = None):
         return f"{n}{suffix}"
 
     export_lines = []
-    all_cleaners = cleaners_data + ["To Assign"]
+    all_cleaners = list(cleaners_data.keys()) + ["To Assign"]
 
     for cleaner in all_cleaners:
         export_lines.append(f"{cleaner}:")

@@ -24,24 +24,15 @@
                     data-availability="{{ data.availability | join (',') }}">
                 
                     {{ name }}
-                    <form action="/cleaners/delete" method="post"
-                    class="delete-cleaner-form" 
-                    onsubmit="return confirmDelete('{{ name }}');">
-                        <input type="hidden" name="name" value="{{ name }}">    
-                        <button type="submit" class="delete-button" 
-                        title="Remove cleaner">
-                        x
-                        </button>
-                    </form>
                 </li>
             {% endfor %}
         </ul>
     </div>
 
-    <div id="cleaner-setting-modal" style="display: none;">
+    <div id="cleaner-settings-modal" style="display: none;">
         <h3 id="cleaner-settings-title">Edit Cleaner Settings</h3>
         <form id="cleaner-settings-form" method="post">
-            <input type="hidden" name="name" id="cleaner-name">
+            <input type="hidden" name="name" id="cleaner-settings-name">
 
             <p>Availability:</p>
                 <label><input type="checkbox" name="availability" value="Mon"> Mon</label>
