@@ -22,7 +22,6 @@
             {% for name, data in cleaners.items() %}
                 <li class="cleaner-item" data-name="{{ name }}"
                     data-availability="{{ data.availability | join (',') }}">
-                
                     {{ name }}
                 </li>
             {% endfor %}
@@ -30,23 +29,25 @@
     </div>
 
     <div id="cleaner-settings-modal" style="display: none;">
-        <h3 id="cleaner-settings-title">Edit Cleaner Settings</h3>
-        <form id="cleaner-settings-form" method="post">
-            <input type="hidden" name="name" id="cleaner-settings-name">
+        <div id="cleaner-settings-modal-content">
+            <h3 id="cleaner-settings-title">Edit Cleaner Settings</h3>
+            <form id="cleaner-settings-form" method="post">
+                <input type="hidden" name="name" id="cleaner-settings-name">
 
-            <p>Availability:</p>
-                <label><input type="checkbox" name="availability" value="Mon"> Mon</label>
-                <label><input type="checkbox" name="availability" value="Tue"> Tue</label>
-                <label><input type="checkbox" name="availability" value="Wed"> Wed</label>
-                <label><input type="checkbox" name="availability" value="Thu"> Thu</label>
-                <label><input type="checkbox" name="availability" value="Fri"> Fri</label>
-                <label><input type="checkbox" name="availability" value="Sat"> Sat</label>
-                <label><input type="checkbox" name="availability" value="Sun"> Sun</label>
-
-                <button type="button" id="save-cleaner-settings">Save</button>
-                <button type="button" id="delete-cleaner-settings">Delete</button>
-                <button type="button" id="cancel-cleaner-settings">Cancel</button>
-        </form>
+                <p>Availability:</p>
+                    <label><input type="checkbox" name="availability" value="Mon"> Mon</label>
+                    <label><input type="checkbox" name="availability" value="Tue"> Tue</label>
+                    <label><input type="checkbox" name="availability" value="Wed"> Wed</label>
+                    <label><input type="checkbox" name="availability" value="Thu"> Thu</label>
+                    <label><input type="checkbox" name="availability" value="Fri"> Fri</label>
+                    <label><input type="checkbox" name="availability" value="Sat"> Sat</label>
+                    <label><input type="checkbox" name="availability" value="Sun"> Sun</label>
+                    <br><br>    
+                    <button type="button" id="save-cleaner-settings">Save</button> 
+                    <button type="button" id="delete-cleaner-settings">Delete</button>
+                    <button type="button" id="cancel-cleaner-settings">Cancel</button>
+            </form>
+        </div>
     </div>
 
     <button id="export-button">Export Schedule</button>

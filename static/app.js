@@ -1,7 +1,3 @@
-function confirmDelete(cleanerName) {
-    return confirm(`Remove ${cleanerName} and all their data?`);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     const dayCells = document.querySelectorAll('.day-cell');
     const popup = document.getElementById('day-action-popup');
@@ -20,8 +16,75 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `/?week_start=${jumpInput.value}`;
         });
     }
+
+    document.querySelectorAll('.cleaner-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const name = item.dataset.name;
+            const availability = item.dataset.availability ? item.dataset.availability.split(',') : [];
+
+            settingsNameInput.value = name;
+            settingsTitle.textContent = `Edit: ${name}`;
+
+
+            document.querySelectorAll('#cleaner-settings-form input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = availability.includes(checkbox.value);
+            });
+
+            settingsModal.style.display = 'flex';
+        });
+    });
+
+    document.getElementById('delete-cleaner-settings').addEventListener('click', function() {
+        if (!confirm(`Remove ${settingsNameInput.value} and all their data?`)) {
+            return;
+        }
+        
+            fetch('/cleaners/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    name: settingsNameInput.value,
+                }),
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert("Failed to delete cleaner.");
+                }
+            });
+    });
+
+    document.getElementById('save-cleaner-settings').addEventListener('click', function() {
+        const checked = [...document.querySelectorAll
+            ('#cleaner-settings-form input[type="checkbox"]:checked')].map(cb => cb.value);
+
+        const params = new URLSearchParams();
+        params.append('name', settingsNameInput.value);
+        checked.forEach(day => params.append('availability', day));
+
+        fetch('/cleaners/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params, 
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert("Failed to save cleaner settings.");
+            }
+        });
+    });
+
+    document.getElementById('cancel-cleaner-settings').addEventListener('click', function() {
+        settingsModal.style.display = 'none';
+    });
     let activeCell = null;
 
+    
     dayCells.forEach(cell => {
         cell.addEventListener('click', function() {
             activeCell = cell;

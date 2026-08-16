@@ -69,11 +69,9 @@ The app will be available at http://127.0.0.1:8000/
 
 ## Notes
 
-- Assignment data is stored **in memory** — restarting the server clears all schedule data. For persistence across restarts, consider adding a JSON file or database backend.
 - __pycache__/ and virtual environment folders are excluded from version control via .gitignore.
 
 ## Future Improvements
 
 - Persist assignments to a database (e.g. SQLite) instead of in-memory storage.
 - Add authentication for multi-user access.
-- Add cleaner information i.e. availability, max cleans per day

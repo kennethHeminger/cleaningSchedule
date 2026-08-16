@@ -121,8 +121,8 @@ async def delete_cleaner(name: str = Form(...)):
 # Update the availability of a cleaner
 @app.post("/cleaners/update")
 async def update_cleaner(
-        name: str = Form(...),
-        availability: list[str] = Form(...)):
+        name: str = Form([]),
+        availability: list[str] = Form([])):
     if name in cleaners_data:
         cleaners_data[name]["availability"] = availability
     return RedirectResponse(url="/", status_code=303)
