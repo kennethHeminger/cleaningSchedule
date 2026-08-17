@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    document.querySelectorAll('.cleaner-item').forEach(item => {
-        item.addEventListener('click', function() {
+    document.querySelectorAll('.cleaner-name').forEach(nameEl => {
+        nameEl.addEventListener('click', function() {
+            const item = nameEl.closest('.cleaner-item');
             const name = item.dataset.name;
             const availability = item.dataset.availability ? item.dataset.availability.split(',') : [];
 

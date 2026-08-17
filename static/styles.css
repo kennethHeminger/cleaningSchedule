@@ -1,27 +1,17 @@
 .cleaner-item {
     margin-bottom: 4px;
+    cursor: default;
     }
         
 .cleaner-name {
-    display: inline-block;
-            margin-right: 10px;
+    cursor: pointer;
     }
 
-.delete-button {   
-       background-color: #e34d4d;
-        color: white;
-        border: none;
-       padding: 1px 2px;
-        cursor: pointer;
-    }
-
-.delete-cleaner-form {
-    display: inline-block;
-    }
-
-.delete-button:hover {        
-    background-color: #ff1a1a;
-    }
+.cleaner-name:hover {
+    text-decoration: underline;
+    color: #2c7be5;
+}
+    
 
 .day-cell {
     cursor: pointer;

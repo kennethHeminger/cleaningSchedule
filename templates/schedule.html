@@ -22,7 +22,7 @@
             {% for name, data in cleaners.items() %}
                 <li class="cleaner-item" data-name="{{ name }}"
                     data-availability="{{ data.availability | join (',') }}">
-                    {{ name }}
+                    <span class ="cleaner-name">{{ name }}</span>
                 </li>
             {% endfor %}
         </ul>
