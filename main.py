@@ -45,10 +45,23 @@ cleaners_data: Dict[str, Dict] ={
     "Mel": {"availability": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]},
 }
 
-units = ["7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127",
-"DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", "DB 24", "DB 25", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18","GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", 
-"Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032","Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233",
-"TB 250"]
+units_data: Dict[str, Dict] = {
+    unit: {"eligible_cleaners": list (cleaners_data.keys())}
+    for unit in ["7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127","DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", "DB 24", "DB 25", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18","GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", "Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032","Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233", "TB 250"]
+}
+
+UNITS_FILE = Path("units.json")
+
+def save_units():
+    UNITS_FILE.write_text(json.dumps(units_data, indent=2))
+
+def load_units():
+    global units_data
+    if UNITS_FILE.exists():
+        units_data = json.loads(UNITS_FILE.read_text())
+
+load_units()
+
 
 
 # Get/Create the list of cleaners and units to display on the schedule page
@@ -84,7 +97,7 @@ async def read_root(request: Request, week_start: str | None = None):
         "schedule.html", 
         {
             "cleaners": cleaners_data,
-            "units": units,
+            "units": units_data,
             "assignments": assignments,
             "assignments_lookup": assignments_lookup,
             "days": days,
@@ -229,7 +242,49 @@ async def mark_vacant(
 
     save_assignments()
     return {"ok": True}
-    
+
+# Rename a unit in the list of units  
+@app.post("/units/rename")
+async def rename_unit(old_name: str = Form(...), new_name: str = Form(...)):
+    if old_name in units_data and new_name and new_name not in units_data:
+        units_data[new_name] = units_data.pop(old_name)
+        
+        for (unit, day), value in list(assignments.items()):
+            if unit == old_name:
+                assignments[(new_name, day)] = assignments.pop((unit, day))
+        save_units()
+        save_assignments()
+        return RedirectResponse(url="/", status_code=303)
+
+# Delete a unit from the list of units
+@app.post("/units/delete")
+async def delete_unit(name: str = Form(...)):
+    if name in units_data:
+        del units_data[name]
+        
+        to_delete = [
+            key for key in assignments.keys() 
+            if key[0] == name
+        ]
+        for key in to_delete:
+            del assignments[key]
+        save_units()
+        save_assignments()
+    return RedirectResponse(url="/", status_code=303)
+
+#Update the eligible cleaners for a specific unit
+@app.post("/units/update-cleaners")
+async def update_unit_cleaners(name: str = Form(...), eligible_cleaners: list[str] = Form([])):
+    if name in units_data:
+        units_data[name]["eligible_cleaners"] = eligible_cleaners
+        save_units()
+    return RedirectResponse(url="/", status_code=303)
+
+@app.get("/units/available-cleaners")
+async def available_cleaners(unit: str):
+    eligible = units_data.get(unit, {}).get("eligible_cleaners", [])
+    return {"cleaners": eligible}
+
 # Print text of schedule    
 @app.get("/export")
 async def export_schedule(week_start: str | None = None):
