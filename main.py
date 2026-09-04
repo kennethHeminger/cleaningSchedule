@@ -97,7 +97,7 @@ async def read_root(request: Request, week_start: str | None = None):
         "schedule.html", 
         {
             "cleaners": cleaners_data,
-            "units": units_data,
+            "units_data": units_data,
             "assignments": assignments,
             "assignments_lookup": assignments_lookup,
             "days": days,
@@ -134,7 +134,7 @@ async def delete_cleaner(name: str = Form(...)):
 # Update the availability of a cleaner
 @app.post("/cleaners/update")
 async def update_cleaner(
-        name: str = Form([]),
+        name: str = Form(...),
         availability: list[str] = Form([])):
     if name in cleaners_data:
         cleaners_data[name]["availability"] = availability
@@ -254,7 +254,7 @@ async def rename_unit(old_name: str = Form(...), new_name: str = Form(...)):
                 assignments[(new_name, day)] = assignments.pop((unit, day))
         save_units()
         save_assignments()
-        return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url="/", status_code=303)
 
 # Delete a unit from the list of units
 @app.post("/units/delete")
@@ -281,7 +281,7 @@ async def update_unit_cleaners(name: str = Form(...), eligible_cleaners: list[st
     return RedirectResponse(url="/", status_code=303)
 
 @app.get("/units/available-cleaners")
-async def available_cleaners(unit: str):
+async def available_cleaners_for_unit(unit: str):
     eligible = units_data.get(unit, {}).get("eligible_cleaners", [])
     return {"cleaners": eligible}
 

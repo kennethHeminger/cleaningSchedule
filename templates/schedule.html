@@ -50,6 +50,30 @@
         </div>
     </div>
 
+    <div id="unit-settings-modal" style="display: none;">
+        <div id="unit-settings-modal-content">
+            <h3 id="unit-settings-title">Edit Unit</h3>
+            <form id="unit-settings-form">
+                <input type="hidden" id="unit-settings-original-name">
+
+                <label>Unit Name:</label>
+                <input type="text" id="unit-settings-name">
+
+                <p>Cleaners:</p>
+                {% for cleaner in cleaners %}
+                    <label>
+                        <input type="checkbox" name="eligible_cleaners" value="{{ cleaner }}">
+                        {{ cleaner }}
+                    </label>
+                {% endfor %}
+
+                <button type="button" id="save-unit-settings">Save</button>
+                <button type="button" id="delete-unit-settings">Delete</button>
+                <button type="button" id="cancel-unit-settings">Cancel</button>
+            </form>
+        </div>"
+    </div>
+
     <button id="export-button">Export Schedule</button>
     <pre id="export-output" style="white-space: pre-wrap; display: none;"></pre>
    
@@ -73,7 +97,9 @@
         <tbody>
         {% for unit in units %}
             <tr>
-                <td>{{ unit }}</td>
+                <td class="unit-name" data-unit ="{{ unit }}"
+                data-eligible-cleaners="{{ units_data[unit].get('eligible_cleaners', []) | join(',') }}">
+                </td>
                 {% for day in days %}
                 {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
                 <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day.date }}">
