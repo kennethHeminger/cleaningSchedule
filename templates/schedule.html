@@ -71,7 +71,7 @@
                 <button type="button" id="delete-unit-settings">Delete</button>
                 <button type="button" id="cancel-unit-settings">Cancel</button>
             </form>
-        </div>"
+        </div>
     </div>
 
     <button id="export-button">Export Schedule</button>
@@ -95,10 +95,11 @@
         </tr>
         </thead>
         <tbody>
-        {% for unit in units %}
+        {% for unit in units_data %}
             <tr>
                 <td class="unit-name" data-unit ="{{ unit }}"
-                data-eligible-cleaners="{{ units_data[unit].get('eligible_cleaners', []) | join(',') }}">
+                data-eligible="{{ units_data[unit].get('eligible_cleaners', []) | join(',') }}">
+                {{ unit }}
                 </td>
                 {% for day in days %}
                 {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
