@@ -103,14 +103,21 @@
                 </td>
                 {% for day in days %}
                 {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
-                <td class="day-cell" data-unit="{{ unit }}" data-day="{{ day.date }}">
+                <td class="day-cell
+                    {% if assignment %}
+                        {% if assignment.cleaner == 'Needs Cleaning' %} needs-cleaning{%-
+                             else %} assigned{%- endif %}
+                        {%- if assignment.b2b %} b2b{% endif %}
+                        {%- if assignment.vacant %} vacant{% endif %}
+                    {%- endif %}"
+                    data-unit="{{ unit }}" data-day="{{ day.date }}">
                     {% if assignment %}
                         {{ assignment.cleaner }}{% if assignment.b2b %}
-                        **B2B{% endif %}
+                        **B2B{% endif %} {% if assignment.vacant %}(vacant){% endif %}
                     {% else %}
                         -
                     {% endif %}
-                </td>                        
+                </td>
                 {% endfor %}
             </tr>
         {% endfor %}
