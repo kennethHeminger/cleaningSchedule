@@ -18,7 +18,7 @@ A lightweight web app for managing and assigning cleaners to units across a week
 - **Backend:** FastAPI, Uvicorn
 - **Templating:** Jinja2
 - **Frontend:** HTML, CSS, vanilla JavaScript (no frameworks)
-- **Data storage:** In-memory Python dictionary (assignments reset on server restart)
+- **Data storage:** JSON
 
 ## Project Structure
 

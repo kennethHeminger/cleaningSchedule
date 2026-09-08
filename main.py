@@ -45,6 +45,20 @@ cleaners_data: Dict[str, Dict] ={
     "Mel": {"availability": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]},
 }
 
+CLEANERS_FILE = Path("cleaners.json")
+
+# Save cleaners data to a JSON file
+def save_cleaners():
+    CLEANERS_FILE.write_text(json.dumps(cleaners_data, indent=2))
+
+# Load cleaners data from a JSON file if it exists
+def load_cleaners():
+    global cleaners_data
+    if CLEANERS_FILE.exists():
+        cleaners_data = json.loads(CLEANERS_FILE.read_text())
+
+load_cleaners()
+
 units_data: Dict[str, Dict] = {
     unit: {"eligible_cleaners": list (cleaners_data.keys())}
     for unit in ["7 Serene Court", "Air 1503", "Air 1504", "Aria 1903", "Avani 906", "Avani 1204", "Avani 1904", "Avani 2306", "Avani 806", "BBOP 503", "BBOP 502", "BH 16e","Sanbono 402", "BH 25a", "BH 28", "Sav 600", "Sav 601", "DB 101", "DB 105", "DB 11", "DB 115", "DB 116", "DB 118", "DB 121", "DB 122", "DB 127","DB 129", "DB 135", "DB 146", "DB 149", "DB 150", "DB 154", "DB 155", "DB 158", "DB 16", "DB 165", "DB 19", "DB 24", "DB 25", "DB 29", "DB 33", "DB 35", "DB 39", "DB 42", "DB 46", "DB 48", "DB 5", "DB 6", "DB 61", "DB 66", "DB 69", "DB 70", "DB 76", "DB 80", "DB 81", "DB 84", "DB 85", "DB 87", "DB 98", "DB 43", "DB 44", "DB 45", "DC 18","GF 66", "Neptune 512", "Oracle 12401", "Oracle 1501", "Oracle 21403", "Oracle 22101", "Oracle 11006", "Oracle 21907", "Phoenician 1105", "Q1 709", "Rhapsody 1405", "Sav 512", "Sav 610", "SG 1402", "SG 1810", "SG 2406", "SG 2606", "SG 2701", "SG 403", "SG 802", "Soul 905", "Spice 205", "The Star", "Swell 1032","Talisman 22", "Verve 17", "Wave 1603", "Wave 2202", "Wave 2203", "Wave 2401", "Wave 2404", "TB 224", "TB 233", "TB 250"]
@@ -52,16 +66,17 @@ units_data: Dict[str, Dict] = {
 
 UNITS_FILE = Path("units.json")
 
+# Save units data to a JSON file
 def save_units():
     UNITS_FILE.write_text(json.dumps(units_data, indent=2))
 
+# Load units data from a JSON file if it exists
 def load_units():
     global units_data
     if UNITS_FILE.exists():
         units_data = json.loads(UNITS_FILE.read_text())
 
 load_units()
-
 
 
 # Get/Create the list of cleaners and units to display on the schedule page
@@ -113,6 +128,7 @@ async def add_cleaner(name: str = Form(...)):
     cleaner_name = name.strip()
     if cleaner_name and cleaner_name not in cleaners_data:
         cleaners_data[cleaner_name] = {"availability": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+        save_cleaners()
     return RedirectResponse(url="/", status_code=303)
 
 # Delete a cleaner from the list of cleaners
@@ -120,7 +136,7 @@ async def add_cleaner(name: str = Form(...)):
 async def delete_cleaner(name: str = Form(...)):
     if name in cleaners_data:
         del cleaners_data[name]
-    
+        save_cleaners()
         # Find all keys where cleaner name is assigned and delete them from assignments
         to_delete = [
             key for key, value in assignments.items() 
@@ -138,6 +154,7 @@ async def update_cleaner(
         availability: list[str] = Form([])):
     if name in cleaners_data:
         cleaners_data[name]["availability"] = availability
+        save_cleaners()
     return RedirectResponse(url="/", status_code=303)
 
 # Get the list of available cleaners for a specific unit and day
@@ -228,6 +245,7 @@ async def mark_vacant(
     key = (unit, day)
     is_auto_needs_cleaning = auto_needs_cleaning.lower() == "true"
 
+    # If the assignment already exists, update it to mark as vacant. Otherwise, create a new assignment with "Needs Cleaning" and mark as vacant.
     if key in assignments:
         assignments[key]["vacant"] = True
         print("Marked Vacant:", unit, day, "->", assignments[key])
@@ -280,6 +298,7 @@ async def update_unit_cleaners(name: str = Form(...), eligible_cleaners: list[st
         save_units()
     return RedirectResponse(url="/", status_code=303)
 
+# Get the list of eligible cleaners for a specific unit
 @app.get("/units/available-cleaners")
 async def available_cleaners_for_unit(unit: str):
     eligible = units_data.get(unit, {}).get("eligible_cleaners", [])
