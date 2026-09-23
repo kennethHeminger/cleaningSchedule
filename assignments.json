@@ -14,11 +14,6 @@
     "b2b": false,
     "vacant": false
   },
-  "SG 403|2026-08-13": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
   "DB 154|2026-08-14": {
     "cleaner": "Paula",
     "b2b": true,
@@ -44,16 +39,6 @@
     "b2b": true,
     "vacant": false
   },
-  "Verve 17|2026-08-15": {
-    "cleaner": "Paula",
-    "b2b": true,
-    "vacant": false
-  },
-  "TB 233|2026-08-15": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
   "Air 1503|2026-08-10": {
     "cleaner": "Paula",
     "b2b": false,
@@ -61,16 +46,6 @@
   },
   "BBOP 503|2026-08-10": {
     "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 1603|2026-08-10": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "Oracle 22101|2026-08-12": {
-    "cleaner": "Mel",
     "b2b": false,
     "vacant": false
   },
@@ -149,11 +124,6 @@
     "b2b": false,
     "vacant": false
   },
-  "Sav 610|2026-08-15": {
-    "cleaner": "Mel",
-    "b2b": false,
-    "vacant": false
-  },
   "Sav 600|2026-08-16": {
     "cleaner": "Paula",
     "b2b": false,
@@ -196,16 +166,6 @@
   },
   "DB 87|2026-08-16": {
     "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Oracle 22101|2026-08-16": {
-    "cleaner": "Mel",
-    "b2b": false,
-    "vacant": false
-  },
-  "Oracle 11006|2026-08-16": {
-    "cleaner": "Mel",
     "b2b": false,
     "vacant": false
   },
@@ -259,31 +219,6 @@
     "b2b": false,
     "vacant": false
   },
-  "SG 2406|2026-08-24": {
-    "cleaner": "PM",
-    "b2b": true,
-    "vacant": false
-  },
-  "Soul 905|2026-08-24": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Swell 1032|2026-08-25": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2203|2026-08-24": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2401|2026-08-24": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
   "Air 1503|2026-08-25": {
     "cleaner": "Jorge",
     "b2b": false,
@@ -309,11 +244,6 @@
     "b2b": false,
     "vacant": false
   },
-  "Oracle 11006|2026-08-25": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
   "DB 39|2026-08-26": {
     "cleaner": "Paula",
     "b2b": false,
@@ -329,11 +259,6 @@
     "b2b": false,
     "vacant": false
   },
-  "Rhapsody 1405|2026-08-26": {
-    "cleaner": "Mel",
-    "b2b": false,
-    "vacant": false
-  },
   "DB 35|2026-08-27": {
     "cleaner": "Paula",
     "b2b": false,
@@ -346,21 +271,6 @@
   },
   "DB 43|2026-08-27": {
     "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 1603|2026-08-28": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "SG 802|2026-08-28": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "SG 2606|2026-08-28": {
-    "cleaner": "PM",
     "b2b": false,
     "vacant": false
   },
@@ -406,16 +316,6 @@
   },
   "DB 122|2026-08-29": {
     "cleaner": "Mel",
-    "b2b": false,
-    "vacant": false
-  },
-  "SG 2406|2026-08-29": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2401|2026-08-29": {
-    "cleaner": "Jorge",
     "b2b": false,
     "vacant": false
   },
@@ -474,44 +374,9 @@
     "b2b": false,
     "vacant": false
   },
-  "SG 403|2026-08-30": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Spice 205|2026-08-30": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2202|2026-08-30": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2404|2026-08-30": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "The Star|2026-08-25": {
-    "cleaner": "Mel",
-    "b2b": false,
-    "vacant": true
-  },
   "Oracle 1501|2026-08-31": {
     "cleaner": "PM",
     "b2b": false,
-    "vacant": false
-  },
-  "Phoenician 1105|2026-08-31": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "The Star|2026-08-31": {
-    "cleaner": "Paula",
-    "b2b": true,
     "vacant": false
   },
   "DB 149|2026-09-01": {
@@ -520,21 +385,6 @@
     "vacant": false
   },
   "Oracle 12401|2026-09-01": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Q1 709|2026-09-01": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Sav 512|2026-09-01": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "Soul 905|2026-09-01": {
     "cleaner": "PM",
     "b2b": false,
     "vacant": false
@@ -569,27 +419,12 @@
     "b2b": true,
     "vacant": false
   },
-  "Rhapsody 1405|2026-09-03": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
   "Sanbono 402|2026-09-04": {
     "cleaner": "Jorge",
     "b2b": false,
     "vacant": false
   },
   "DB 61|2026-09-04": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "Oracle 22101|2026-09-04": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "The Star|2026-09-04": {
     "cleaner": "Paula",
     "b2b": false,
     "vacant": false
@@ -674,11 +509,6 @@
     "b2b": false,
     "vacant": false
   },
-  "SG 2606|2026-09-05": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
   "DB 150|2026-09-06": {
     "cleaner": "Jorge",
     "b2b": false,
@@ -719,26 +549,6 @@
     "b2b": false,
     "vacant": false
   },
-  "Rhapsody 1405|2026-09-08": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "SG 2406|2026-09-08": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2203|2026-09-08": {
-    "cleaner": "Jorge",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2401|2026-09-07": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
   "Aria 1903|2026-09-10": {
     "cleaner": "Paula",
     "b2b": false,
@@ -756,16 +566,6 @@
   },
   "DB 98|2026-09-09": {
     "cleaner": "Mel",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 2202|2026-09-10": {
-    "cleaner": "Paula",
-    "b2b": true,
-    "vacant": false
-  },
-  "TB 233|2026-09-10": {
-    "cleaner": "PM",
     "b2b": false,
     "vacant": false
   },
@@ -810,16 +610,6 @@
     "vacant": false
   },
   "DB 87|2026-09-11": {
-    "cleaner": "Paula",
-    "b2b": false,
-    "vacant": false
-  },
-  "SG 802|2026-09-12": {
-    "cleaner": "PM",
-    "b2b": false,
-    "vacant": false
-  },
-  "Wave 1603|2026-09-12": {
     "cleaner": "Paula",
     "b2b": false,
     "vacant": false
@@ -919,8 +709,518 @@
     "b2b": false,
     "vacant": false
   },
+  "Sanbono 402|2026-09-11": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": true
+  },
+  "DB 35|2026-09-14": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": true
+  },
+  "DB 16|2026-09-14": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": true
+  },
+  "BBOP 502|2026-09-14": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 129|2026-09-14": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 76|2026-09-14": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": true
+  },
+  "Oracle 21907|2026-09-14": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 1006|2026-08-16": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 1006|2026-08-25": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 2101|2026-08-12": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 2101|2026-08-16": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 2101|2026-09-04": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 84|2026-09-14": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": true
+  },
+  "DB 154|2026-09-15": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Air 1504|2026-09-16": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Aria 1903|2026-09-16": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Avani 806|2026-09-16": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 11|2026-09-16": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 149|2026-09-16": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 33|2026-09-16": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 61|2026-09-16": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 44|2026-09-16": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "GF 66|2026-09-16": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 1006|2026-09-16": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Air 1503|2026-09-17": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Avani 1204|2026-09-17": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "BBOP 502|2026-09-17": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 39|2026-09-17": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 85|2026-09-17": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 43|2026-09-17": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "BH 25a|2026-09-18": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 158|2026-09-18": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 48|2026-09-18": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 1501|2026-09-18": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "BBOP 502|2026-09-19": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "BH 16e|2026-09-19": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 46|2026-09-19": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 81|2026-09-19": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DC 18|2026-09-19": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "BBOP 503|2026-09-20": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 165|2026-09-20": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 80|2026-09-20": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 84|2026-09-20": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Oracle 21907|2026-09-20": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 24|2026-09-15": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": true
+  },
+  "DB 150|2026-09-15": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": true
+  },
+  "Phoenician 1105|2026-08-31": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Phoenician 1105|2026-09-17": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Q1 709|2026-09-01": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Q1 709|2026-09-16": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Rhapsody 1405|2026-08-26": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Rhapsody 1405|2026-09-03": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Rhapsody 1405|2026-09-08": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 512|2026-09-01": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 512|2026-09-20": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 512|2026-09-15": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": true
+  },
+  "Sav 610|2026-08-15": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 610|2026-09-17": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 1402|2026-09-15": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 1402|2026-09-20": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 1810|2026-09-17": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2406|2026-08-24": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 2406|2026-08-29": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2406|2026-09-08": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2406|2026-09-15": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 2606|2026-08-28": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2606|2026-09-05": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2606|2026-09-17": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2701|2026-09-15": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 403|2026-08-13": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 403|2026-08-30": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 403|2026-09-15": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 802|2026-08-28": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 802|2026-09-12": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Soul 905|2026-08-24": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Soul 905|2026-09-01": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Soul 905|2026-09-15": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Spice 205|2026-08-30": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
   "Spice 205|2026-09-13": {
     "cleaner": "Needs Cleaning",
+    "b2b": false,
+    "vacant": false
+  },
+  "Spice 205|2026-09-15": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": true
+  },
+  "The Star|2026-08-25": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": true
+  },
+  "The Star|2026-08-31": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "The Star|2026-09-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "The Star|2026-09-19": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "The Star|2026-09-15": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": true
+  },
+  "Swell 1032|2026-08-25": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Verve 17|2026-08-15": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Verve 17|2026-09-18": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 1603|2026-08-10": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 1603|2026-08-28": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 1603|2026-09-12": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 1603|2026-09-20": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-08-30": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-09-10": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Wave 2202|2026-09-14": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Wave 2203|2026-08-24": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2203|2026-09-08": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2203|2026-09-15": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-08-24": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-08-29": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-09-07": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-09-14": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2404|2026-08-30": {
+    "cleaner": "Jorge",
     "b2b": false,
     "vacant": false
   },
@@ -929,9 +1229,743 @@
     "b2b": false,
     "vacant": false
   },
-  "Sanbono 402|2026-09-11": {
+  "Wave 2404|2026-09-20": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 233|2026-08-15": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "TB 233|2026-09-10": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "TB 250|2026-09-14": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Aria 1903|2026-09-21": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "BH 16e|2026-09-21": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 127|2026-09-21": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 129|2026-09-21": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 158|2026-09-21": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 25|2026-09-21": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 45|2026-09-21": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Phoenician 1105|2026-09-21": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-09-21": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 600|2026-09-22": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 35|2026-09-22": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 76|2026-09-22": {
     "cleaner": "Mel",
     "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-09-22": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 16|2026-09-23": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 33|2026-09-23": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 2406|2026-09-23": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Aria 1903|2026-09-24": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Avani 806|2026-09-24": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 138|2026-09-24": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 149|2026-09-24": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 2701|2026-09-24": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "50k|2026-09-27": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 25|2026-09-25": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 70|2026-09-25": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 87|2026-09-25": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 45|2026-09-25": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 12401|2026-09-25": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Oracle 2101|2026-09-25": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Soul 905|2026-09-26": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Rhapsody 1405|2026-09-26": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Phoenician 1105|2026-09-26": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 1501|2026-09-26": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "GF 66|2026-09-26": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "DC 18|2026-09-26": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 43|2026-09-26": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 98|2026-09-26": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 61|2026-09-26": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 46|2026-09-26": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 158|2026-09-26": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Air 1503|2026-09-27": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "Avani 1204|2026-09-27": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "BBOP 503|2026-09-27": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 155|2026-09-27": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 165|2026-09-27": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 24|2026-09-27": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 33|2026-09-27": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 81|2026-09-27": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 84|2026-09-27": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 610|2026-09-27": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 2701|2026-09-27": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Swell 1032|2026-09-27": {
+    "cleaner": "Needs Cleaning",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-09-27": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2401|2026-09-27": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2404|2026-09-27": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 233|2026-09-27": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 601|2026-09-22": {
+    "cleaner": "Paula",
+    "b2b": false,
     "vacant": true
+  },
+  "DB 118|2026-09-26": {
+    "cleaner": "Needs Cleaning",
+    "b2b": true
+  },
+  "Aria 1903|2026-09-28": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Avani 2306|2026-09-28": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 154|2026-09-28": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 42|2026-09-28": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 70|2026-09-28": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 76|2026-09-28": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Spice 205|2026-09-28": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Verve 17|2026-09-28": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 224|2026-09-28": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 233|2026-09-28": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Air 1504|2026-09-29": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "BBOP 502|2026-09-29": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Sav 600|2026-09-29": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 601|2026-09-29": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 121|2026-09-29": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 138|2026-09-29": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 35|2026-09-29": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 21403|2026-09-29": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 21907|2026-09-29": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Q1 709|2026-09-29": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 1402|2026-09-29": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "SG 403|2026-09-29": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "The Star|2026-09-29": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "Avani 1904|2026-09-30": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "BH 25a|2026-09-30": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 11|2026-09-30": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 19|2026-09-30": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 48|2026-09-30": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 80|2026-09-30": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 84|2026-09-30": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 43|2026-09-30": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 12401|2026-09-30": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-09-30": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 224|2026-09-30": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "50k|2026-10-01": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 600|2026-10-01": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 122|2026-10-01": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 127|2026-10-01": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 24|2026-10-01": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 39|2026-10-01": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 66|2026-10-01": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 81|2026-10-01": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 85|2026-10-01": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 98|2026-10-01": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Oracle 21907|2026-10-01": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 250|2026-10-01": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Air 1504|2026-10-02": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "BH 16e|2026-10-02": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 155|2026-10-02": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 16|2026-10-02": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "Oracle 2101|2026-10-02": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 512|2026-10-02": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Avani 1204|2026-10-03": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Avani 1904|2026-10-03": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "BH 25a|2026-10-03": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 11|2026-10-03": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 118|2026-10-03": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 42|2026-10-03": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 61|2026-10-03": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 61|2026-10-04": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "Phoenician 1105|2026-10-03": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 610|2026-10-03": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "SG 802|2026-10-03": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Spice 205|2026-10-03": {
+    "cleaner": "Jorge",
+    "b2b": false,
+    "vacant": false
+  },
+  "50k|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "BBOP 503|2026-10-04": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "Sav 600|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 135|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 149|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 158|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 25|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 46|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 69|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "DB 76|2026-10-04": {
+    "cleaner": "Jorge",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 44|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 45|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "GF 66|2026-10-04": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "DC 18|2026-10-03": {
+    "cleaner": "PM",
+    "b2b": false,
+    "vacant": false
+  },
+  "Oracle 2101|2026-10-04": {
+    "cleaner": "Mel",
+    "b2b": true,
+    "vacant": false
+  },
+  "Swell 1032|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": false,
+    "vacant": false
+  },
+  "Verve 17|2026-10-04": {
+    "cleaner": "Mel",
+    "b2b": false,
+    "vacant": false
+  },
+  "Wave 2202|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Wave 2203|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Wave 2404|2026-10-04": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "TB 250|2026-10-04": {
+    "cleaner": "PM",
+    "b2b": true,
+    "vacant": false
+  },
+  "DB 115|2026-10-01": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
+  },
+  "Wave 1603|2026-10-01": {
+    "cleaner": "Paula",
+    "b2b": true,
+    "vacant": false
   }
 }

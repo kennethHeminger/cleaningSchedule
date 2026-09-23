@@ -2,149 +2,539 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
     <title>Cleaning Schedule</title>
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="/static/styles.css">
-    <script src="/static/app.js"></script>
 
+    <script src="/static/app.js" defer></script>
 </head>
+
 <body>
-    <h1>Cleaning Schedule</h1>
+    <main class="app-shell">
+        <header class="page-header">
 
-     <form action="/cleaners/add" method="post">
-            <input type="text" name="name" placeholder="Name" required>
-            <button type="submit">Add Cleaner</button>
-    </form>
+            <h1>Cleaning Schedule</h1>
 
-    <div class="cleaner-list">
-        <strong>Cleaners:</strong>
-        <ul id = "cleaner-list">
-            {% for name, data in cleaners.items() %}
-                <li class="cleaner-item" data-name="{{ name }}"
-                    data-availability="{{ data.availability | join (',') }}">
-                    <span class ="cleaner-name">{{ name }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+        </header>
 
-    <div id="cleaner-settings-modal" style="display: none;">
-        <div id="cleaner-settings-modal-content">
-            <h3 id="cleaner-settings-title">Edit Cleaner Settings</h3>
-            <form id="cleaner-settings-form" method="post">
-                <input type="hidden" name="name" id="cleaner-settings-name">
 
-                <p>Availability:</p>
-                    <label><input type="checkbox" name="availability" value="Mon"> Mon</label>
-                    <label><input type="checkbox" name="availability" value="Tue"> Tue</label>
-                    <label><input type="checkbox" name="availability" value="Wed"> Wed</label>
-                    <label><input type="checkbox" name="availability" value="Thu"> Thu</label>
-                    <label><input type="checkbox" name="availability" value="Fri"> Fri</label>
-                    <label><input type="checkbox" name="availability" value="Sat"> Sat</label>
-                    <label><input type="checkbox" name="availability" value="Sun"> Sun</label>
-                    <br><br>    
-                    <button type="button" id="save-cleaner-settings">Save</button> 
-                    <button type="button" id="delete-cleaner-settings">Delete</button>
-                    <button type="button" id="cancel-cleaner-settings">Cancel</button>
+        <!-- Quick-add forms -->
+
+        <section
+            class="quick-actions"
+            aria-label="Add cleaners and units"
+        >
+            <form
+                class="add-form"
+                action="/cleaners/add"
+                method="post"
+            >
+
+                <input
+                    type="text"
+                    id="new-cleaner-name"
+                    name="name"
+                    placeholder="Cleaner name"
+                    maxlength="100"
+                    autocomplete="off"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Add Cleaner
+                </button>
             </form>
-        </div>
-    </div>
 
-    <div id="unit-settings-modal" style="display: none;">
-        <div id="unit-settings-modal-content">
-            <h3 id="unit-settings-title">Edit Unit</h3>
-            <form id="unit-settings-form">
-                <input type="hidden" id="unit-settings-original-name">
 
-                <label>Unit Name:</label>
-                <input type="text" id="unit-settings-name">
+            <form
+                class="add-form"
+                action="/units/add"
+                method="post"
+            >
 
-                <p>Cleaners:</p>
-                {% for cleaner in cleaners %}
-                    <label>
-                        <input type="checkbox" name="eligible_cleaners" value="{{ cleaner }}">
-                        {{ cleaner }}
-                    </label>
-                {% endfor %}
+                <input
+                    type="text"
+                    id="new-unit-name"
+                    name="name"
+                    placeholder="Unit name"
+                    maxlength="100"
+                    autocomplete="off"
+                    required
+                >
 
-                <button type="button" id="save-unit-settings">Save</button>
-                <button type="button" id="delete-unit-settings">Delete</button>
-                <button type="button" id="cancel-unit-settings">Cancel</button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Add Unit
+                </button>
             </form>
-        </div>
-    </div>
+        </section>
 
-    <button id="export-button">Export Schedule</button>
-    <pre id="export-output" style="white-space: pre-wrap; display: none;"></pre>
-   
-    <div class ="week-nav">
-        <a href="/?week_start={{ prev_week }}">&laquo; Previous Week</a>
 
-        <input type="date" id="jump-to-date" value="{{ week_start }}">
+        <!-- Cleaner list -->
+
+        <section class="cleaner-list">
+            <div class="section-heading">
+                <strong>Cleaners</strong>
+
         
-        <a href="/?week_start={{ next_week }}"> Next Week &raquo;</a>
+            </div>
+
+            <ul id="cleaner-list">
+                {% for name, data in cleaners.items() %}
+                    <li
+                        class="cleaner-item"
+                        data-name="{{ name }}"
+                        data-availability="{{ data.availability | join(',') }}"
+                    >
+                        <span
+                            class="cleaner-name"
+                            tabindex="0"
+                            role="button"
+                        >
+                            {{ name }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
+        <!-- Schedule controls -->
+
+        <section class="schedule-controls">
+            <div class="schedule-toolbar">
+                <button
+                    type="button"
+                    id="export-button"
+                    class="btn btn-dark"
+                >
+                    Export Schedule
+                </button>
+
+                <nav
+                    class="week-nav"
+                    aria-label="Schedule week"
+                >
+                    <a href="/?week_start={{ prev_week }}">
+                        &laquo; Previous Week
+                    </a>
+
+
+                    <input
+                        type="date"
+                        id="jump-to-date"
+                        value="{{ week_start }}"
+                    >
+
+                    <a href="/?week_start={{ next_week }}">
+                        Next Week &raquo;
+                    </a>
+                </nav>
+            </div>
+
+            <pre
+                id="export-output"
+                style="white-space: pre-wrap; display: none;"
+            ></pre>
+        </section>
+
+
+        <!-- Schedule table -->
+
+        <section
+            class="table-card"
+            aria-label="Weekly cleaning schedule"
+        >
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Unit</th>
+
+                            {% for day in days %}
+                                <th scope="col">
+                                    {{ day.name }}
+                                    <br>
+                                    <small>{{ day.display }}</small>
+                                </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for unit in units_data %}
+                            <tr>
+                                <td
+                                    class="unit-name"
+                                    data-unit="{{ unit }}"
+                                    data-eligible="{{ units_data[unit].get('eligible_cleaners', []) | join(',') }}"
+                                >
+                                    {{ unit }}
+                                </td>
+
+                                {% for day in days %}
+                                    {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
+
+                                    <td
+                                        class="day-cell
+                                            {% if assignment %}
+                                                {% if assignment.cleaner == 'Needs Cleaning' %}
+                                                    needs-cleaning
+                                                {%- else %}
+                                                    assigned
+                                                {%- endif %}
+
+                                                {%- if assignment.b2b %}
+                                                    b2b
+                                                {% endif %}
+
+                                                {%- if assignment.vacant %}
+                                                    vacant
+                                                {% endif %}
+                                            {%- endif %}
+                                        "
+                                        data-unit="{{ unit }}"
+                                        data-day="{{ day.date }}"
+                                    >
+                                        {% if assignment %}
+                                            {{ assignment.cleaner }}
+
+                                            {% if assignment.b2b %}
+                                                **B2B
+                                            {% endif %}
+
+                                            {% if assignment.vacant %}
+                                                (vacant)
+                                            {% endif %}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Cleaner settings modal -->
+
+    <div
+        id="cleaner-settings-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cleaner-settings-title"
+        style="display: none;"
+    >
+        <div id="cleaner-settings-modal-content">
+            <header class="modal-header">
+                <h2 id="cleaner-settings-title">
+                    Edit Cleaner Settings
+                </h2>
+
+                <p class="modal-description">
+                    Choose which days this cleaner is available.
+                </p>
+            </header>
+
+            <form
+                id="cleaner-settings-form"
+                method="post"
+            >
+                <input
+                    type="hidden"
+                    name="name"
+                    id="cleaner-settings-name"
+                >
+
+                <fieldset class="option-group">
+                    <legend>Availability</legend>
+
+                    <div class="choice-grid">
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Mon"
+                            >
+                            Mon
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Tue"
+                            >
+                            Tue
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Wed"
+                            >
+                            Wed
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Thu"
+                            >
+                            Thu
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Fri"
+                            >
+                            Fri
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Sat"
+                            >
+                            Sat
+                        </label>
+
+                        <label class="choice-pill">
+                            <input
+                                type="checkbox"
+                                name="availability"
+                                value="Sun"
+                            >
+                            Sun
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="button-row">
+                    <button
+                        type="button"
+                        id="save-cleaner-settings"
+                        class="btn btn-primary"
+                    >
+                        Save Changes
+                    </button>
+
+                    <button
+                        type="button"
+                        id="delete-cleaner-settings"
+                        class="btn btn-danger-outline"
+                    >
+                        Delete
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancel-cleaner-settings"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Unit</th>
-            {% for day in days %}
-            <th>{{ day.name }}<br><small>{{ day.display}}</small></th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for unit in units_data %}
-            <tr>
-                <td class="unit-name" data-unit ="{{ unit }}"
-                data-eligible="{{ units_data[unit].get('eligible_cleaners', []) | join(',') }}">
-                {{ unit }}
-                </td>
-                {% for day in days %}
-                {% set assignment = assignments_lookup.get(unit ~ '|' ~ day.date) %}
-                <td class="day-cell
-                    {% if assignment %}
-                        {% if assignment.cleaner == 'Needs Cleaning' %} needs-cleaning{%-
-                             else %} assigned{%- endif %}
-                        {%- if assignment.b2b %} b2b{% endif %}
-                        {%- if assignment.vacant %} vacant{% endif %}
-                    {%- endif %}"
-                    data-unit="{{ unit }}" data-day="{{ day.date }}">
-                    {% if assignment %}
-                        {{ assignment.cleaner }}{% if assignment.b2b %}
-                        **B2B{% endif %} {% if assignment.vacant %}(vacant){% endif %}
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <!-- Pop up for assigning cleans -->
-    <div id="day-action-popup" class = "popup" style ="display: none;">
-        <p id="popup-title"></p>
+    <!-- Unit settings modal -->
 
-        <button data-action="needs-cleaning">Needs Cleaning</button>
-        <button data-action="b2b">Back to Back</button>
-        <button data-action="vacant">Vacant</button>
-    
-        <div>
-            <label for="popup-cleaner-select">Assign Cleaner:</label>
+    <div
+        id="unit-settings-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="unit-settings-title"
+        style="display: none;"
+    >
+        <div id="unit-settings-modal-content">
+            <header class="modal-header">
+                <h2 id="unit-settings-title">
+                    Edit Unit
+                </h2>
+
+                <p class="modal-description">
+                    Rename the unit and choose eligible cleaners.
+                </p>
+            </header>
+
+            <form id="unit-settings-form">
+                <input
+                    type="hidden"
+                    id="unit-settings-original-name"
+                >
+
+                <div class="form-group">
+                    <label
+                        class="field-label"
+                        for="unit-settings-name"
+                    >
+                        Unit Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="unit-settings-name"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <fieldset class="option-group">
+                    <legend>Eligible Cleaners</legend>
+
+                    <div class="choice-grid">
+                        {% for cleaner in cleaners %}
+                            <label class="choice-pill">
+                                <input
+                                    type="checkbox"
+                                    name="eligible_cleaners"
+                                    value="{{ cleaner }}"
+                                >
+
+                                {{ cleaner }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+
+                <div class="button-row">
+                    <button
+                        type="button"
+                        id="save-unit-settings"
+                        class="btn btn-primary"
+                    >
+                        Save Changes
+                    </button>
+
+                    <button
+                        type="button"
+                        id="delete-unit-settings"
+                        class="btn btn-danger-outline"
+                    >
+                        Delete
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancel-unit-settings"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Day action popup -->
+
+    <div
+        id="day-action-popup"
+        class="popup"
+        role="dialog"
+        aria-labelledby="popup-title"
+        style="display: none;"
+    >
+        <header class="popup-header">
+            <p id="popup-title"></p>
+        </header>
+
+        <div class="popup-actions">
+            <button
+                type="button"
+                class="btn btn-warning"
+                data-action="needs-cleaning"
+            >
+                Needs Cleaning
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-warning"
+                data-action="b2b"
+            >
+                Back to Back
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-action="vacant"
+            >
+                Vacant
+            </button>
+        </div>
+
+        <div class="popup-assignment">
+            <label for="popup-cleaner-select">
+                Assign Cleaner
+            </label>
+
             <select id="popup-cleaner-select">
-                <option value="">-- Select Cleaner --</option>
+                <option value="">
+                    -- Select Cleaner --
+                </option>
+
                 {% for cleaner in cleaners %}
-                    <option value="{{ cleaner }}">{{ cleaner }}</option>
+                    <option value="{{ cleaner }}">
+                        {{ cleaner }}
+                    </option>
                 {% endfor %}
             </select>
-            <button data-action="assign-cleaner">Confirm</button>
-            <button data-action="clear">Clear</button>
+
+            <button
+                type="button"
+                class="btn btn-primary btn-block"
+                data-action="assign-cleaner"
+            >
+                Confirm Assignment
+            </button>
         </div>
-        
-        <button data-action="cancel">Back</button>
+
+        <div class="popup-actions">
+            <button
+                type="button"
+                class="btn btn-danger-outline"
+                data-action="clear"
+            >
+                Clear Assignment
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-action="cancel"
+            >
+                Back
+            </button>
+        </div>
     </div>
 </body>
 </html>

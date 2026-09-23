@@ -34,11 +34,8 @@
   },
   "Mel": {
     "availability": [
-      "Mon",
-      "Tue",
       "Wed",
       "Thu",
-      "Fri",
       "Sat",
       "Sun"
     ]
