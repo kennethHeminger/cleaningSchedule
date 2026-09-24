@@ -328,7 +328,7 @@ async def export_schedule(week_start: str | None = None):
         if 11 <= n % 100 <= 13:
             suffix = "th"
         else:
-            suffix = {1: "st", 2: "nd"}.get(n % 10, "th")
+            suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
         return f"{n}{suffix}"
 
     export_lines = []
