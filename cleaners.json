@@ -35,7 +35,26 @@
   "Mel": {
     "availability": [
       "Wed",
+      "Sat",
+      "Sun"
+    ]
+  },
+  "Danielle": {
+    "availability": [
+      "Mon",
+      "Tue",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
+  },
+  "Jana": {
+    "availability": [
+      "Mon",
+      "Tue",
+      "Wed",
       "Thu",
+      "Fri",
       "Sat",
       "Sun"
     ]

@@ -128,7 +128,20 @@ async def add_cleaner(name: str = Form(...)):
     cleaner_name = name.strip()
     if cleaner_name and cleaner_name not in cleaners_data:
         cleaners_data[cleaner_name] = {"availability": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+
+        # Eligible to clean every unit
+        for unit_data in units_data.values():
+            eligible_cleaners = unit_data.setdefault(
+                "eligible_cleaners",
+                []
+            )
+
+            if cleaner_name not in eligible_cleaners:
+                eligible_cleaners.append(cleaner_name)
+    
         save_cleaners()
+        save_units()
+        
     return RedirectResponse(url="/", status_code=303)
 
 # Delete a cleaner from the list of cleaners
